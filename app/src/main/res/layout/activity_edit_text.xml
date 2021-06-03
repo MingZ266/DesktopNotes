@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:orientation="vertical"
     tools:context=".activity.EditTextActivity"
     tools:ignore="HardcodedText">
@@ -12,19 +14,313 @@
     <EditText
         android:id="@+id/inputText"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="textNoSuggestions"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:background="@drawable/bg_outline_input"
+        android:hint="桌面便签"
+        android:textSize="20sp"
+        tools:ignore="AutoFill"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        tools:ignore="DisableBaselineAlignment">
+
+        <LinearLayout
+            android:id="@+id/selectTextColor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@drawable/bg_outline"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/showTextColor"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                tools:background="@android:color/holo_blue_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="字体颜色"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/selectBgColor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="@drawable/bg_outline"
+            android:gravity="center">
+
+            <View
+                android:id="@+id/showBgColor"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                tools:background="@android:color/holo_blue_light"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="背景颜色"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="字体大小"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:background="@drawable/bg_outline"
+        tools:ignore="DisableBaselineAlignment">
+
+        <RelativeLayout
+            android:id="@+id/smallSize"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="小"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/smallSelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/middleSize"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="中"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/middleSelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/largeSize"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="大"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/largeSelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/maxSize"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="特大"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/maxSSelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="背景透明度"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:background="@drawable/bg_outline"
+        tools:ignore="DisableBaselineAlignment">
+
+        <RelativeLayout
+            android:id="@+id/zeroAlpha"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="透明"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/zeroSelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/halfAlpha"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="半透明"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/halfSelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/maxAlpha"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="不透明"
+                android:textSize="18sp"/>
+
+            <View
+                android:id="@+id/maxASelect"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_selector_btn_select"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:inputType="textNoSuggestions"
-        android:hint="请输入便签内容"
-        tools:ignore="AutoFill"/>
+        android:gravity="center"
+        android:text="预览"
+        android:textSize="20sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_solid">
+
+        <TextView
+            android:id="@+id/preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:minWidth="250dp"
+            android:minHeight="50dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="桌面便签"
+            tools:textSize="25sp"
+            tools:background="@drawable/bg_widget_half_alpha"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/white"
+            android:text="字号过大时请调整便签的大小，以免显示不全"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/ok"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/bg_selector_ok_btn"
         android:text="确定"
         android:textSize="22sp"
-        android:layout_gravity="center_horizontal"/>
+        android:textColor="@android:color/white"/>
 
 </LinearLayout>

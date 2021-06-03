@@ -1,18 +1,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_widget">
+    android:layout_height="match_parent">
 
-    <!--失败品：
-        在RemoteViewService只保留了一个RemoteViewsFactory，以至于
-        当更新一个Widget中的集合元素时，多个Widget都会改变-->
-    <ListView
-        android:id="@+id/notesList"
+    <ImageView
+        android:id="@+id/background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:divider="@null"
-        android:listSelector="@android:color/transparent"/>
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/bg_widget_half_alpha"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/notes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        tools:textSize="25sp"
+        tools:text="@string/testScroll"/>
 
 </RelativeLayout>

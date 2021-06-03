@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">桌面便签</string>
+    <string name="testScroll">ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890\nNotes\n1\n2\n3\n4\n5\n6</string>
 </resources>

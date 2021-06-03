@@ -28,7 +28,8 @@ public class EditTextActivity extends AppCompatActivity {
     private int appWidgetId;
     private NotesWidget.WidgetAttr widgetAttr;
     private AlertDialog exitDialog = null;// 退出弹窗
-    // 选择结果
+    // 编辑结果
+    private String notesInput;
     private int resultTextColor;
     private int resultBgColor;
     private int sizesIndex = 0;// 字号选中的索引
@@ -46,7 +47,7 @@ public class EditTextActivity extends AppCompatActivity {
             NotesWidget.WidgetAttr.ALPHA_MAX
     };
 
-    private EditText inputText;
+    private TextView inputTip;
     // 设置颜色
     private View selectTextColor;
     private View showTextColor;
@@ -62,6 +63,10 @@ public class EditTextActivity extends AppCompatActivity {
     private Button ok;
     // 预览
     private TextView preview;
+
+    // 输入框
+    private AlertDialog editDialog;
+    private EditText editNotes;
 
     // 颜色选择器
     private AlertDialog colorDialog;
@@ -89,7 +94,9 @@ public class EditTextActivity extends AppCompatActivity {
                     background.setShape(GradientDrawable.RECTANGLE);
                     background.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                             8.0f, getResources().getDisplayMetrics()));
+                    notesInput = widgetAttr.getNotes();
                     initView();
+                    initEditNotes();
                     initColorPicker();
                     myListener();
                     initWindows();
@@ -102,7 +109,7 @@ public class EditTextActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        inputText = findViewById(R.id.inputText);
+        inputTip = findViewById(R.id.inputTip);
         // 设置颜色
         selectTextColor = findViewById(R.id.selectTextColor);
         showTextColor = findViewById(R.id.showTextColor);
@@ -138,6 +145,22 @@ public class EditTextActivity extends AppCompatActivity {
         preview = findViewById(R.id.preview);
     }
 
+    private void initEditNotes() {
+        View editView = View.inflate(activity, R.layout.dialog_edit_notes, null);
+        editDialog = new AlertDialog.Builder(activity/*, R.style.CircleCornerAlertDialog*/)
+                .setView(editView)
+                .create();
+        editNotes = editView.findViewById(R.id.inputNotes);
+        editDialog.setCanceledOnTouchOutside(false);
+        editView.findViewById(R.id.dialogOk).setOnClickListener(v -> {
+            editDialog.dismiss();
+            notesInput = String.valueOf(editNotes.getText());
+            if (TextUtils.isEmpty(notesInput)) {
+                notesInput = "桌面便签";
+            }
+        });
+    }
+
     private void initColorPicker() {
         View colorView = View.inflate(activity, R.layout.dialog_color_picker, null);
         colorDialog = new AlertDialog.Builder(activity, R.style.CircleCornerAlertDialog)
@@ -162,7 +185,6 @@ public class EditTextActivity extends AppCompatActivity {
     }
 
     private void initWindows() {
-        inputText.setText(widgetAttr.getNotes());
         resultBgColor = widgetAttr.getBackgroundColor();
         resultTextColor = widgetAttr.getTextColor();
         showTextColor.setBackgroundColor(resultTextColor);
@@ -212,6 +234,10 @@ public class EditTextActivity extends AppCompatActivity {
     }
 
     private void myListener() {
+        inputTip.setOnClickListener(v -> {
+            editNotes.setText(notesInput);
+            editDialog.show();
+        });
         // 字体颜色选择
         selectTextColor.setOnClickListener(v -> {
             colorPicker.setInitialColor(resultTextColor);
@@ -246,11 +272,7 @@ public class EditTextActivity extends AppCompatActivity {
         }
         // 确定按钮
         ok.setOnClickListener(v -> {
-            String input = String.valueOf(inputText.getText());
-            if (TextUtils.isEmpty(input)) {
-                input = "桌面便签";
-            }
-            widgetAttr.updateAttr(allAlpha[alphasIndex], resultBgColor, input, resultTextColor, allTextSize[sizesIndex]);
+            widgetAttr.updateAttr(allAlpha[alphasIndex], resultBgColor, notesInput, resultTextColor, allTextSize[sizesIndex]);
             NotesWidget.updateAppWidget(activity, AppWidgetManager.getInstance(this), appWidgetId, widgetAttr);
             finish();
         });
@@ -258,20 +280,14 @@ public class EditTextActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String input = String.valueOf(inputText.getText());
-        if (TextUtils.isEmpty(input)) {
-            input = "桌面便签";
-        }
-        if (widgetAttr.needUpdate(allAlpha[alphasIndex], resultBgColor, input, resultTextColor, allTextSize[sizesIndex])) {
+        if (widgetAttr.needUpdate(allAlpha[alphasIndex], resultBgColor, notesInput, resultTextColor, allTextSize[sizesIndex])) {
             if (exitDialog == null) {
                 View dialogView = View.inflate(activity, R.layout.dialog_exit_tip, null);
                 exitDialog = new AlertDialog.Builder(activity, R.style.CircleCornerAlertDialog)
                         .setView(dialogView)
                         .create();
                 dialogView.findViewById(R.id.dialogCancel).setOnClickListener(v -> exitDialog.dismiss());
-                dialogView.findViewById(R.id.dialogOk).setOnClickListener(v -> {
-                    activity.finish();
-                });
+                dialogView.findViewById(R.id.dialogOk).setOnClickListener(v -> activity.finish());
             }
             exitDialog.show();
         } else {

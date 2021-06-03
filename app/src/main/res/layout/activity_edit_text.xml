@@ -11,16 +11,13 @@
     tools:context=".activity.EditTextActivity"
     tools:ignore="HardcodedText">
 
-    <EditText
-        android:id="@+id/inputText"
+    <TextView
+        android:id="@+id/inputTip"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:inputType="textNoSuggestions"
-        android:textCursorDrawable="@drawable/cursor_color"
-        android:background="@drawable/bg_outline_input"
-        android:hint="桌面便签"
+        android:text="点此编辑便签内容"
         android:textSize="20sp"
-        tools:ignore="AutoFill"/>
+        android:gravity="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"

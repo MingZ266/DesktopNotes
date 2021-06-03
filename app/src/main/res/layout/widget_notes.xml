@@ -1,0 +1,18 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget">
+
+    <!--失败品：
+        在RemoteViewService只保留了一个RemoteViewsFactory，以至于
+        当更新一个Widget中的集合元素时，多个Widget都会改变-->
+    <ListView
+        android:id="@+id/notesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"/>
+
+</RelativeLayout>
